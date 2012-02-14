@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using MvcBugTrack.Models;
+using System.Data.Entity;
 
 namespace MvcBugTrack
 {
@@ -31,6 +33,14 @@ namespace MvcBugTrack
 
         protected void Application_Start()
         {
+            /*
+             * Drops the database if anything has changed in the model schema.
+             * This is just part of the development process. I'm not responsible
+             * if anyone's data gets erased!
+             */
+            Database.SetInitializer<BugTrackContext>(
+                new DropCreateDatabaseIfModelChanges<BugTrackContext>());
+
             AreaRegistration.RegisterAllAreas();
 
             RegisterGlobalFilters(GlobalFilters.Filters);
