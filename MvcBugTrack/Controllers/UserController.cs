@@ -7,18 +7,21 @@ using MvcBugTrack.Models;
 
 namespace MvcBugTrack.Controllers
 {
-    public class HomeController : Controller
+    public class UserController : Controller
     {
         private BugTrackContext _db = new BugTrackContext();
 
-        // Index action
+
+        //
+        // GET: /Status/
+
         public ActionResult Index()
         {
-            var model = _db.Bugs.ToList();
+            var model = _db.Users.ToList();
             return View(model);
         }
 
-        
+
 
         // Create actions
         public ActionResult Create()
@@ -27,11 +30,11 @@ namespace MvcBugTrack.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Bug newBug)
+        public ActionResult Create(User newUser)
         {
             try
             {
-                _db.Bugs.Add(newBug);
+                _db.Users.Add(newUser);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -47,15 +50,15 @@ namespace MvcBugTrack.Controllers
         // Edit actions
         public ActionResult Edit(int id)
         {
-            return View(_db.Bugs.Find(id));
+            return View(_db.Users.Find(id));
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, Bug bug)
+        public ActionResult Edit(int id, User user)
         {
             try
             {
-                _db.Entry(bug).State = System.Data.EntityState.Modified;
+                _db.Entry(user).State = System.Data.EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -71,15 +74,15 @@ namespace MvcBugTrack.Controllers
         // Delete actions
         public ActionResult Delete(int id)
         {
-            return View(_db.Bugs.Find(id));
+            return View(_db.Users.Find(id));
         }
 
         [HttpPost]
-        public ActionResult Delete(int id, Bug bug)
+        public ActionResult Delete(int id, User user)
         {
             try
             {
-                _db.Entry(bug).State = System.Data.EntityState.Deleted;
+                _db.Entry(user).State = System.Data.EntityState.Deleted;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -88,14 +91,6 @@ namespace MvcBugTrack.Controllers
                 // TODO Add error display logic here eventually.
                 return View();
             }
-        }
-
-
-
-        // Details actions
-        public ActionResult Details(int id)
-        {
-            return View(_db.Bugs.Find(id));
         }
     }
 }
