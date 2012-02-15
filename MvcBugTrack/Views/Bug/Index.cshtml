@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MvcBugTrack.Models.Bug>
+@using MvcBugTrack.Models
+
+@{
+    ViewBag.Title = "Index";
+    BugTrackContext db = new BugTrackContext();
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            ID
+        </th>
+        <th>
+            ShortDescription
+        </th>
+        <th>
+            Project
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Priority
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            AssignedTo
+        </th>
+        <th>
+            ReportedBy
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.ID
+        </td>
+        <td>
+            @Html.ActionLink(item.ShortDescription, "Edit", new { id = item.ID })
+        </td>
+        <td>
+            @db.Projects.Find(item.Project).Name
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category)
+        </td>
+        <td>
+            @db.Priorities.Find(item.Priority).Name
+        </td>
+        <td>
+            @db.Statuses.Find(item.Status).Name
+        </td>
+        <td>
+            @db.Users.Find(item.AssignedTo).UserName
+        </td>
+        <td>
+            @db.Users.Find(item.ReportedBy).UserName
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

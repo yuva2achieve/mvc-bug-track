@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace MvcBugTrack.Controllers
 {
-    public class HomeController : Controller
+    public class AdminController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Admin/
 
         public ActionResult Index()
         {
