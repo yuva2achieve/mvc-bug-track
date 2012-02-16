@@ -3,4 +3,8 @@
 }
 
 <h2>Index</h2>
-<p>This is the Admin page, which will eventually have links to manage projects, statuses, etc.</p>
+@Html.ActionLink("Manage Projects", "Index", "Project", null, null)<br />
+@Html.ActionLink("Manage Users", "Index", "User", null, null)<br />
+@Html.ActionLink("Manage Categories", "Index", "Category", null, null)<br />
+@Html.ActionLink("Manage Priorities", "Index", "Priority", null, null)<br />
+@Html.ActionLink("Manage Statuses", "Index", "Status", null, null)
