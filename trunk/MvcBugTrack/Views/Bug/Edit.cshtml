@@ -1,7 +1,9 @@
 ﻿@model MvcBugTrack.Models.Bug
+@using MvcBugTrack.Models
 
 @{
     ViewBag.Title = "Edit";
+    BugTrackContext db = new BugTrackContext();
 }
 
 <h2>Edit</h2>
@@ -28,7 +30,7 @@
             @Html.LabelFor(model => model.Project)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Project)
+            @Html.DropDownListFor(model => model.Project, new SelectList(db.Projects.ToList(), "ID", "Name"))
             @Html.ValidationMessageFor(model => model.Project)
         </div>
 
@@ -36,7 +38,7 @@
             @Html.LabelFor(model => model.Category)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Category)
+            @Html.DropDownListFor(model => model.Category, new SelectList(db.Categories.ToList(), "ID", "Name"))
             @Html.ValidationMessageFor(model => model.Category)
         </div>
 
@@ -44,7 +46,7 @@
             @Html.LabelFor(model => model.Priority)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Priority)
+            @Html.DropDownListFor(model => model.Priority, new SelectList(db.Priorities.ToList(), "ID", "Name"))
             @Html.ValidationMessageFor(model => model.Priority)
         </div>
 
@@ -52,7 +54,7 @@
             @Html.LabelFor(model => model.Status)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, new SelectList(db.Statuses.ToList(), "ID", "Name"))
             @Html.ValidationMessageFor(model => model.Status)
         </div>
 
@@ -60,7 +62,7 @@
             @Html.LabelFor(model => model.AssignedTo)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.AssignedTo)
+            @Html.DropDownListFor(model => model.AssignedTo, new SelectList(db.Users.ToList(), "ID", "UserName"))
             @Html.ValidationMessageFor(model => model.AssignedTo)
         </div>
 
@@ -68,8 +70,7 @@
             @Html.LabelFor(model => model.ReportedBy)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ReportedBy)
-            @Html.ValidationMessageFor(model => model.ReportedBy)
+            @Html.Label(db.Users.Find(Model.ReportedBy).UserName)
         </div>
 
         <p>
